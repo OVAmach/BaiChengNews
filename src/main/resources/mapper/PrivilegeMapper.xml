@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iteamcn.baichengnews.dao.PrivilegeMapper">
+  <resultMap id="BaseResultMap" type="com.iteamcn.baichengnews.entity.Privilege">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="p_code" jdbcType="VARCHAR" property="p_code" />
+    <result column="p_name" jdbcType="VARCHAR" property="p_name" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    p_code, p_name
+  </sql>
+  <select id="selectByExample" parameterType="com.iteamcn.baichengnews.entity.PrivilegeExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from privilege
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from privilege
+    where p_code = #{p_code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from privilege
+    where p_code = #{p_code,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iteamcn.baichengnews.entity.PrivilegeExample">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from privilege
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iteamcn.baichengnews.entity.Privilege">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into privilege (p_code, p_name)
+    values (#{p_code,jdbcType=VARCHAR}, #{p_name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iteamcn.baichengnews.entity.Privilege">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into privilege
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="p_code != null">
+        p_code,
+      </if>
+      <if test="p_name != null">
+        p_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="p_code != null">
+        #{p_code,jdbcType=VARCHAR},
+      </if>
+      <if test="p_name != null">
+        #{p_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iteamcn.baichengnews.entity.PrivilegeExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select count(*) from privilege
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update privilege
+    <set>
+      <if test="record.p_code != null">
+        p_code = #{record.p_code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p_name != null">
+        p_name = #{record.p_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update privilege
+    set p_code = #{record.p_code,jdbcType=VARCHAR},
+      p_name = #{record.p_name,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iteamcn.baichengnews.entity.Privilege">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update privilege
+    <set>
+      <if test="p_name != null">
+        p_name = #{p_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_code = #{p_code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iteamcn.baichengnews.entity.Privilege">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update privilege
+    set p_name = #{p_name,jdbcType=VARCHAR}
+    where p_code = #{p_code,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+<meta charset="UTF-8">
+<div class="container">
+    <div class="row navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" href="#">菜鸟教程</a>-->
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul id="nav_row" class="nav navbar-nav">
+                <li><a href="/">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('ul.navbar-nav li:first-child').addClass("active");
+        $('ul.navbar-nav li').click(function (e){
+            $('ul.navbar-nav li').removeClass("active");
+            $(this).addClass("active");
+        });
+        addChannelListListener(addNav);
+    });
+    function addNav(data) {
+        for(x in data){
+            $('#nav_row').append("<li><a href='"+"/channel/"+data[x].ch_code+"'>"+data[x].ch_name+"</a></li>");
+        }
+    }
+</script>

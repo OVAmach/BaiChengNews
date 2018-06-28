@@ -1,0 +1,76 @@
+<meta charset="UTF-8">
+<div class="center-block">
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">新闻频道</span>
+            <select id="news_add_channel" class="form-control">
+
+            </select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">新闻标题</span>
+            <input id="news_add_title" type="text" class="form-control">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">新闻展示图片URL</span>
+            <input id="news_add_pic" type="text" class="form-control">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">新闻正文</span>
+            <textarea id="news_add_content" class="form-control"></textarea>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">新闻权重</span>
+            <input id="news_add_priority" type="number" min="1" max="1000" class="form-control">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">新闻可否评论</span>
+            <select id="news_add_can_comment" class="form-control">
+                <option value="true">可评论</option>
+                <option value="false">不可评论</option>
+            </select>
+        </div>
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary  pull-right" onclick="addNews()">提交</button>
+        </div>
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-default">取消</button>
+        </div>
+    </div>
+</div>
+<script>
+    addChannelListListener(channelListListener);
+    function channelListListener(data) {
+        for(x in data){
+            $('#news_add_channel').append('<option value ="'+data[x].ch_id+'">'+data[x].ch_name+'</option>')
+        }
+    }
+    function addNews() {
+        var channel=parseInt($('#news_add_channel').val());
+        var title=$('#news_add_title').val();
+        var pic=$('#news_add_pic').val();
+        if(pic=='')pic=null;
+        var content=$('#news_add_content').val();
+        var priority=parseInt($('#news_add_priority').val());
+        if(priority=='')priority=null;
+        var can_comment=$('#news_add_can_comment').val()=='true';
+        var data={n_channel:channel,n_title:title,n_pic:pic,n_content:content,n_priority:priority,n_can_comment:can_comment};
+        data=JSON.stringify(data);
+        $.ajax({
+            url:backSideURL+"api/news/add",
+            method:"POST",
+            dataType:"json",
+            contentType:"application/json; charset=UTF-8",
+            data:data,
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successAddNews
+        });
+    }
+    function successAddNews(data) {
+        var json=eval(data);
+        $('#infoModal_info').text(json.info);
+        $('#infoModal').modal('show');
+    }
+</script>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iteamcn.baichengnews.dao.ChannelMapper">
+  <resultMap id="BaseResultMap" type="com.iteamcn.baichengnews.entity.Channel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="ch_id" jdbcType="INTEGER" property="ch_id" />
+    <result column="ch_code" jdbcType="VARCHAR" property="ch_code" />
+    <result column="ch_name" jdbcType="VARCHAR" property="ch_name" />
+    <result column="ch_priority" jdbcType="INTEGER" property="ch_priority" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    ch_id, ch_code, ch_name, ch_priority
+  </sql>
+  <select id="selectByExample" parameterType="com.iteamcn.baichengnews.entity.ChannelExample" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from channel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from channel
+    where ch_id = #{ch_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from channel
+    where ch_id = #{ch_id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.iteamcn.baichengnews.entity.ChannelExample">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from channel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.iteamcn.baichengnews.entity.Channel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into channel (ch_id, ch_code, ch_name, 
+      ch_priority)
+    values (#{ch_id,jdbcType=INTEGER}, #{ch_code,jdbcType=VARCHAR}, #{ch_name,jdbcType=VARCHAR}, 
+      #{ch_priority,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iteamcn.baichengnews.entity.Channel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ch_id != null">
+        ch_id,
+      </if>
+      <if test="ch_code != null">
+        ch_code,
+      </if>
+      <if test="ch_name != null">
+        ch_name,
+      </if>
+      <if test="ch_priority != null">
+        ch_priority,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ch_id != null">
+        #{ch_id,jdbcType=INTEGER},
+      </if>
+      <if test="ch_code != null">
+        #{ch_code,jdbcType=VARCHAR},
+      </if>
+      <if test="ch_name != null">
+        #{ch_name,jdbcType=VARCHAR},
+      </if>
+      <if test="ch_priority != null">
+        #{ch_priority,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.iteamcn.baichengnews.entity.ChannelExample" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select count(*) from channel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update channel
+    <set>
+      <if test="record.ch_id != null">
+        ch_id = #{record.ch_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ch_code != null">
+        ch_code = #{record.ch_code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ch_name != null">
+        ch_name = #{record.ch_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ch_priority != null">
+        ch_priority = #{record.ch_priority,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update channel
+    set ch_id = #{record.ch_id,jdbcType=INTEGER},
+      ch_code = #{record.ch_code,jdbcType=VARCHAR},
+      ch_name = #{record.ch_name,jdbcType=VARCHAR},
+      ch_priority = #{record.ch_priority,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iteamcn.baichengnews.entity.Channel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update channel
+    <set>
+      <if test="ch_code != null">
+        ch_code = #{ch_code,jdbcType=VARCHAR},
+      </if>
+      <if test="ch_name != null">
+        ch_name = #{ch_name,jdbcType=VARCHAR},
+      </if>
+      <if test="ch_priority != null">
+        ch_priority = #{ch_priority,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ch_id = #{ch_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iteamcn.baichengnews.entity.Channel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jun 13 09:45:52 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update channel
+    set ch_code = #{ch_code,jdbcType=VARCHAR},
+      ch_name = #{ch_name,jdbcType=VARCHAR},
+      ch_priority = #{ch_priority,jdbcType=INTEGER}
+    where ch_id = #{ch_id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllChannel" resultMap="BaseResultMap">
+  	select * from channel order by ch_priority desc
+  </select>
+  
+  <select id="selectChannelByCode" resultMap="BaseResultMap" parameterType="String">
+  	select * from channel where ch_code=#{code}
+  </select>
+</mapper>

@@ -1,0 +1,316 @@
+<meta charset="UTF-8">
+<!--登录模态框-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="loginModalLabel">
+                    登录
+                </h4>
+            </div>
+            <div class="modal-body" align="center">
+                <div class="center-block">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户名</span>
+                        <input id="login_username" class="form-control" type="text">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input id="login_password" class="form-control" type="password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="login()">
+                    登录
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--注册模态框-->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="registerModalLabel">
+                    注册
+                </h4>
+            </div>
+            <div class="modal-body" align="center">
+                <div class="center-block">
+                    <div class="input-group">
+                        <span class="input-group-addon">用户名</span>
+                        <input id="register_username" class="form-control" type="text">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">昵称</span>
+                        <input id="register_nick" class="form-control" type="text">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input id="register_password" class="form-control" type="password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="register()">
+                    注册
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--信息模态框-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="infoModalLabel">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="center-block">
+                    <p id="infoModal_info"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--用户信息模态框-->
+<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="userInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="userInfoModalLabel">
+                    用户信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="center-block">
+                    用户ID:<input id="userInfoModal_userId" type="text"><br>
+                    用户名:<input id="userInfoModal_userName" type="text"><br>
+                    用户昵称:<input id="userInfoModal_userNick" type="text"><br>
+                    用户组:<input id="userInfoModal_userGroup" type="text">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--登出模态框-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="logoutModalLabel">
+                    确定登出
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="center-block">
+                    确定要退出吗？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="logout()">退出</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="info" class="row">
+        <div id="myinfo" class="col-lg-2 pull-right text-right"><a id="info_0"></a><a id="info_1" data-toggle="modal" data-target="#loginModal">登录</a>|<a id="info_2" data-toggle="modal" data-target="#registerModal">注册</a></div>
+    </div>
+    <div id="head" class="row">
+        <div class="col-lg-12  col-xs-12">
+            <div class="row">
+                <div id="logo" class="col-lg-2 col-xs-4">
+                    <a href="/">
+                        <img src="/image/logo1.png">
+                    </a>
+
+                </div>
+                <div id="search" class="col-lg-4 col-xs-8 pull-right">
+                    <form class="bs-example bs-example-form" role="form" action="search" method="post">
+                        <div class="input-group input-group-xs" >
+                            <input type="text" class="form-control" name="text">
+                            <span class="input-group-addon glyphicon glyphicon-search" style="top: 0px"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var callBack=new Array();
+    var completed=false;
+    $(function () {
+        addUserListener(updateInfoBar);
+    })
+    // function checkLogin(){
+    //     $.ajax({
+    //         url:backSideURL+"api/loginCheck",
+    //         method:"POST",
+    //         dataType:"json",
+    //         xhrFields:{
+    //             withCredentials:true
+    //         },
+    //         success:successCheckLogin
+    //     });
+    // }
+    // function successCheckLogin(data) {
+    //     var json=eval(data);
+    //     if(json.code===100) {
+    //         if(json.object!=null){
+    //             updateInfoBar(json.object);
+    //         }
+    //     }
+    // }
+
+    function login() {
+        var username=$('#login_username').val();
+        var password=$('#login_password').val();
+        $.ajax({
+            url:backSideURL+"api/login",
+            method:"POST",
+            dataType:"json",
+            contentType:"application/json; charset=UTF-8",
+            data:'{"username":"'+username+'","password":"'+password+'"}',
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successLoginData
+        });
+    }
+    function register() {
+        var username=$('#register_username').val();
+        var nick=$('#register_nick').val();
+        var password=$('#register_password').val();
+        var data={username:username,nick:nick,password:password};
+        data=JSON.stringify(data);
+        $.ajax({
+            url:backSideURL+"api/register",
+            method:"POST",
+            dataType:"json",
+            contentType:"application/json; charset=UTF-8",
+            data:data,
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successRegisterData
+        });
+    }
+    function logout() {
+        $.ajax({
+            url:backSideURL+"api/logout",
+            method:"POST",
+            dataType:"json",
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successLogoutData
+        });
+    }
+    function successLogoutData(data) {
+        var json=eval(data);
+        if(json.code===100) {
+            //注销成功
+            $('#infoModal_info').text(json.info);
+            $('#infoModal').modal('show');
+            updateUser(null);
+            updateInfoBar(null);
+        }
+    }
+    function successLoginData(data){
+        var json=eval(data);
+        if(json.code===100) {
+            var loginObject=json.object;
+            if(loginObject.code==1){
+                //登录成功
+                var user=loginObject.object;
+                $('#infoModal_info').text('欢迎您,'+user.u_nick);
+                $('#infoModal').modal('show');
+                updateUser(user);
+                updateInfoBar(user);
+            }else{
+                //登录失败
+                $('#infoModal_info').text(loginObject.info);
+                $('#infoModal').modal('show');
+            }
+        }
+    }
+    function successRegisterData(data){
+        var json=eval(data);
+        if(json.code===100) {
+            var registerObject=json.object;
+            if(registerObject.code==1){
+                //登录成功
+                $('#infoModal_info').text('注册成功');
+                $('#infoModal').modal('show');
+            }else{
+                //登录失败
+                $('#infoModal_info').text(registerObject.info);
+                $('#infoModal').modal('show');
+            }
+        }
+    }
+    function updateInfoBar(user){
+        if(user!=null){
+            $('#userInfoModal_userId').val(user.u_id);
+            $('#userInfoModal_userName').val(user.u_name);
+            $('#userInfoModal_userNick').val(user.u_nick);
+            $('#userInfoModal_userGroup').val(user.u_group);
+            $('#info_1').attr("data-target",'#userInfoModal');
+            $('#info_1').text(user.u_nick);
+            $('#info_2').attr("data-target",'#logoutModal');
+            $('#info_2').text('退出');
+            if(user.u_group=='admin'){
+                $('#info_0').text('管理页');
+                $('#info_0').attr('href','/admin');
+            }
+        }else{
+            $('#myinfo').html('<a id="info_0"></a><a id="info_1" data-toggle="modal" data-target="#loginModal">登录</a>|<a id="info_2" data-toggle="modal" data-target="#registerModal">注册</a>');
+        }
+        completed=true;
+        for(x in callBack){
+            callBack[x]();
+        }
+    }
+    function addHeaderCompleteListener(callback) {
+        if(completed){
+            callback();
+        }else{
+            callBack.push(callback);
+        }
+    }
+</script>

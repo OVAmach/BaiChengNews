@@ -1,0 +1,27 @@
+#news_title_bar{
+    margin-top: 20px;
+    border-top: 2px #24292e solid;
+    border-bottom: 1px #CCCCCC solid;
+}
+#news_title_bar #news_title{
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+#news_title_bar p{
+    text-align: center;
+}
+#news_content p{
+    font-size: 20px;
+    text-indent:2em;
+    margin: 0;
+}
+#news_content img{
+
+}
+a:focus,a:hover{
+    color: #000000;
+}
+a{
+    color: #000000;
+}

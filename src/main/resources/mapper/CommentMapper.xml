@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iteamcn.baichengnews.dao.CommentMapper">
+	<resultMap id="BaseResultMap" type="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		<id column="c_id" jdbcType="INTEGER" property="c_id" />
+		<result column="c_user" jdbcType="INTEGER" property="c_user" />
+		<result column="c_news" jdbcType="INTEGER" property="c_news" />
+		<result column="c_check" jdbcType="BIT" property="c_check" />
+		<result column="c_date" jdbcType="TIMESTAMP" property="c_date" />
+		<result column="c_enable" jdbcType="BIT" property="c_enable" />
+	</resultMap>
+	<resultMap id="AdvResultMap" type="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		<id column="c_id" jdbcType="INTEGER" property="c_id" />
+		<result column="c_user" jdbcType="INTEGER" property="c_user" />
+		<result column="c_news" jdbcType="INTEGER" property="c_news" />
+		<result column="c_check" jdbcType="BIT" property="c_check" />
+		<result column="c_date" jdbcType="TIMESTAMP" property="c_date" />
+		<result column="c_enable" jdbcType="BIT" property="c_enable" />
+		<association property="c_userObject" column="c_user"
+			javaType="com.iteamcn.baichengnews.entity.User"
+			select="com.iteamcn.baichengnews.dao.UserMapper.selectByPrimaryKey" />
+		<association property="c_newsObject" column="c_news"
+			javaType="com.iteamcn.baichengnews.entity.News"
+			select="com.iteamcn.baichengnews.dao.NewsMapper.selectByPrimaryKey" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		c_id, c_user, c_news, c_check, c_date, c_enable
+	</sql>
+	<select id="selectByExample" parameterType="com.iteamcn.baichengnews.entity.CommentExample"
+		resultMap="BaseResultMap">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from comment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		select
+		<include refid="Base_Column_List" />
+		from comment
+		where c_id = #{c_id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		delete from comment
+		where c_id = #{c_id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.iteamcn.baichengnews.entity.CommentExample">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		delete from comment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		insert into comment (c_id, c_user, c_news,
+		c_check, c_date, c_enable
+		)
+		values (#{c_id,jdbcType=INTEGER}, #{c_user,jdbcType=INTEGER},
+		#{c_news,jdbcType=INTEGER},
+		#{c_check,jdbcType=BIT}, #{c_date,jdbcType=TIMESTAMP}, #{c_enable,jdbcType=BIT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		insert into comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="c_id != null">
+				c_id,
+			</if>
+			<if test="c_user != null">
+				c_user,
+			</if>
+			<if test="c_news != null">
+				c_news,
+			</if>
+			<if test="c_check != null">
+				c_check,
+			</if>
+			<if test="c_date != null">
+				c_date,
+			</if>
+			<if test="c_enable != null">
+				c_enable,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="c_id != null">
+				#{c_id,jdbcType=INTEGER},
+			</if>
+			<if test="c_user != null">
+				#{c_user,jdbcType=INTEGER},
+			</if>
+			<if test="c_news != null">
+				#{c_news,jdbcType=INTEGER},
+			</if>
+			<if test="c_check != null">
+				#{c_check,jdbcType=BIT},
+			</if>
+			<if test="c_date != null">
+				#{c_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="c_enable != null">
+				#{c_enable,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.iteamcn.baichengnews.entity.CommentExample"
+		resultType="java.lang.Long">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		select count(*) from comment
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		update comment
+		<set>
+			<if test="record.c_id != null">
+				c_id = #{record.c_id,jdbcType=INTEGER},
+			</if>
+			<if test="record.c_user != null">
+				c_user = #{record.c_user,jdbcType=INTEGER},
+			</if>
+			<if test="record.c_news != null">
+				c_news = #{record.c_news,jdbcType=INTEGER},
+			</if>
+			<if test="record.c_check != null">
+				c_check = #{record.c_check,jdbcType=BIT},
+			</if>
+			<if test="record.c_date != null">
+				c_date = #{record.c_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.c_enable != null">
+				c_enable = #{record.c_enable,jdbcType=BIT},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		update comment
+		set c_id = #{record.c_id,jdbcType=INTEGER},
+		c_user = #{record.c_user,jdbcType=INTEGER},
+		c_news = #{record.c_news,jdbcType=INTEGER},
+		c_check = #{record.c_check,jdbcType=BIT},
+		c_date = #{record.c_date,jdbcType=TIMESTAMP},
+		c_enable = #{record.c_enable,jdbcType=BIT}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		update comment
+		<set>
+			<if test="c_user != null">
+				c_user = #{c_user,jdbcType=INTEGER},
+			</if>
+			<if test="c_news != null">
+				c_news = #{c_news,jdbcType=INTEGER},
+			</if>
+			<if test="c_check != null">
+				c_check = #{c_check,jdbcType=BIT},
+			</if>
+			<if test="c_date != null">
+				c_date = #{c_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="c_enable != null">
+				c_enable = #{c_enable,jdbcType=BIT},
+			</if>
+		</set>
+		where c_id = #{c_id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.iteamcn.baichengnews.entity.Comment">
+		<!-- WARNING - @mbg.generated This element was generated on Wed Jun 13 
+			10:31:51 CST 2018. by MyBatis Generator, do not modify. -->
+		update comment
+		set c_user = #{c_user,jdbcType=INTEGER},
+		c_news = #{c_news,jdbcType=INTEGER},
+		c_check = #{c_check,jdbcType=BIT},
+		c_date = #{c_date,jdbcType=TIMESTAMP},
+		c_enable = #{c_enable,jdbcType=BIT}
+		where c_id = #{c_id,jdbcType=INTEGER}
+	</update>
+</mapper>

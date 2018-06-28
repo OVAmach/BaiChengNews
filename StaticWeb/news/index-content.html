@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/index-content.css">
+<div id="content">
+    <div id="news_title_bar" class="row">
+        <div class="row">
+            <p id="news_title">没有标题</p>
+        </div>
+        <div class="row">
+            <p>作者:<a id="author_name">author</a></p>
+        </div>
+        <div class="row">
+            <p id="news_time">time</p>
+        </div>
+
+    </div>
+    <div id="news_content" class="row">
+        <p>没有正文</p>
+    </div>
+</div>
+<script>
+    $(function () {
+        // $('.img_news_area * img').addClass("img-responsive");
+        // $('.img_news_area').addClass("visible-lg");
+    })
+    $(document).ready(function () {
+        // alert(location.pathname);
+        var path=location.pathname.split('/');
+        $.ajax({
+            url:backSideURL+"api/news/detail",
+            method:"POST",
+            dataType:"json",
+            contentType:"application/json; charset=UTF-8",
+            data:'{"newsId":'+path[path.length-1]+'}',
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successNews
+        });
+    });
+    function successNews(data) {
+        var json=eval(data);
+        if(json.code===100) {
+            var title=json.object.n_title;
+            var authorName=json.object.n_authorObject.u_nick;
+            var authorId=json.object.n_authorObject.u_id;
+            var date=new Date(json.object.n_date);
+            var content=json.object.n_content;
+            $('#news_title').text(title);
+            $('#author_name').text(authorName);
+            $('#author_name').attr('href','/user/detail/'+authorId);
+            $('#news_time').text(date);
+            $('#news_content').html(content);
+        }
+    }
+</script>

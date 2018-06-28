@@ -1,0 +1,76 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/index-content.css">
+<div id="content">
+
+
+</div>
+<div id="list_group" class="btn-group">
+</div>
+<script>
+    var page=1;
+    var list=-1;
+    var path=location.pathname.split('/');
+    var channelCode=path[path.length-1];
+    addChannelListListener(channelListListener);
+    function channelListListener(data) {
+        for(x in data){
+            if(data[x].ch_code==channelCode){
+                loadNewsList(page,data[x].ch_id);
+            }
+        }
+    }
+    function loadNewsList(page,channelId){
+        var data={page:page,channelId:channelId};
+        data=JSON.stringify(data);
+        $.ajax({
+            url:backSideURL+"api/news/list",
+            method:"POST",
+            dataType:"json",
+            contentType:"application/json; charset=UTF-8",
+            data:data,
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successLoadNewsList
+        });
+        this.page=page;
+    }
+    function successLoadNewsList(data) {
+        var json=eval(data);
+        if(json.code==100){
+            var page=json.object.page;
+            list=json.object.list;
+            $('#content').html('');
+            for(x in list){
+                var news=list[x];
+                $('#content').append('<a href="/news/'+news.n_id+'" class="list-group-item">'+news.n_title+'</a>');
+            }
+            $('#list_group').html('');
+            var cur=page.currentPage;
+            if(cur>=3){
+                for(var i=cur-2;i<cur;i++){
+                    $('#list_group').append('<button type="button" class="btn btn-default list" list="'+i+'">'+i+'</button>');
+                }
+            }else{
+                for(var i=1;i<cur;i++){
+                    $('#list_group').append('<button type="button" class="btn btn-default list" list="'+i+'">'+i+'</button>');
+                }
+            }
+            $('#list_group').append('<button type="button" class="btn btn-default list disabled" list="'+cur+'">'+cur+'</button>');
+            var tot=page.totalPage;
+            if(tot-cur>2){
+                for(var i=cur+1;i<cur+3;i++){
+                    $('#list_group').append('<button type="button" class="btn btn-default list" list="'+i+'">'+i+'</button>');
+                }
+            }else{
+                for(var i=cur+1;i<=tot;i++){
+                    $('#list_group').append('<button type="button" class="btn btn-default list" list="'+i+'">'+i+'</button>');
+                }
+            }
+            $('#list_group').append('<button type="button" class="btn btn-default">共'+tot+'页</button>');
+            $('.list').click(function () {
+                loadNewsList(parseInt($(this).attr('list')));
+            })
+        }
+    }
+</script>

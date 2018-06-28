@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>百城新闻网-----iTeam旗下新闻站点</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link rel="stylesheet" href="/base/bootstrap.min.css">
+
+    <script src="/base/jquery.min.js"></script>
+    <script src="/js/public.js"></script>
+    <script src="/base/bootstrap.min.js"></script>
+    <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+    <script src="/base/html5shiv.js"></script>
+    <script src="/base/respond.min.js"></script>
+
+    <![endif]-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            load();
+        });
+        function load() {
+            // loadPage('#header','/header.html',null);
+            // loadPage('#center','index-content.html',null);
+            // loadPage('#side_bar','side-bar.html',null);
+            $('#header').load('/header.html');
+            $('#nav').load('/nav.html');
+            $('#center').load('index-content.html');
+            $('#side_bar').load('side-bar.html');
+        };
+    </script>
+    <link rel="stylesheet" href="/css/global.css">
+    <style type="text/css">
+        div{
+            /*border: red 1px solid;*/
+            /*margin: 3px 3px 3px 3px;*/
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header">
+    </div>
+    <div id="nav">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="center" class="col-lg-8 col-xs-12">
+
+            </div>
+            <div id="side_bar" class="col-lg-4 visible-lg">
+
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+    </div>
+
+<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<meta charset="UTF-8">
+<style>
+    ul ul{
+        margin-left: 20px;
+        margin-bottom: 0!important;
+    }
+</style>
+<ul class="list-group">
+    <li class="list-group-item" data-toggle="collapse" data-target="#news_group">新闻管理</li>
+    <ul id="news_group" class="list-group collapse">
+        <li class="list-group-item link-to" href="content/news-add.html">添加新闻</li>
+        <li class="list-group-item link-to" href="content/news-manage.html">管理新闻</li>
+        <li class="list-group-item link-to">审核新闻</li>
+    </ul>
+    <li class="list-group-item link-to">用户管理</li>
+    <li class="list-group-item link-to">暂无</li>
+    <li class="list-group-item link-to">暂无</li>
+    <li class="list-group-item link-to">暂无</li>
+</ul>
+<script>
+    $('.link-to').click(function () {
+        $('#admin_content').load($(this).attr('href'));
+    });
+</script>

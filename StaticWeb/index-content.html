@@ -1,0 +1,192 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/index-content.css">
+<div id="content">
+    <div id="hot_news" class="row">
+        <!--轮播列-->
+        <div class="col-lg-4 col-xs-12"  style="padding: 0">
+            <!--- 轮播 --->
+            <div id="myCarousel" class="carousel slide " data-ride="carousel" data-interval="3000" >
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item">
+                        <a href="#">
+                            <img class="img-responsive center-block" src="image/slide1.png" alt="First slide">
+                            <div class="carousel-caption carousel-title">暂无新闻</div>
+                        </a>
+                    </div>
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <!--新闻列-->
+
+        <div class="news_col col-lg-6 col-xs-12" >
+            <div class="visible-xs" style="height: 20px"></div>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+        </div>
+        <div id="app_col" class="visible-lg col-lg-2" >
+            <img class="img-responsive" src="image/app.png">
+            <p align="center">扫码下载手机App</p>
+        </div>
+    </div>
+    <div class="clearfix visible-xs"></div>
+    <div class="row channel_title">
+        <p>无法连接到服务器</p>
+    </div>
+    <div class="row channel_content">
+        <div class="news_col col-lg-6">
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+            <a href="#"><p>暂无新闻</p></a>
+        </div>
+        <div class="img_news_area col-lg-6">
+            <div class="row">
+                <div class="col-lg-6">
+                    <a href="#">
+                        <img src="image/slide1.png">
+                        <p>暂无新闻</p>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a href="#">
+                        <img src="image/slide1.png">
+                        <p>暂无新闻</p>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <a href="#">
+                        <img src="image/slide1.png">
+                        <p>暂无新闻</p>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a href="#">
+                        <img src="image/slide1.png">
+                        <p>暂无新闻</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.img_news_area * img').addClass("img-responsive");
+        $('.img_news_area').addClass("visible-lg");
+    })
+    $(document).ready(function () {
+        $.ajax({
+            url:backSideURL+"api/index/hot",
+            method:"POST",
+            dataType:"json",
+            xhrFields:{
+                withCredentials:true
+            },
+            success:successHot
+        });
+        addChannelListListener(channelListListener);
+    });
+    function channelListListener(data) {
+        for (x in data){
+            $('#content').append($('.channel_title:first').clone());
+            $('#content').append($('.channel_content:first').clone());
+            $('.channel_title:last').attr('chId',data[x].ch_id);
+            $('.channel_content:last').attr('chId',data[x].ch_id);
+            $('.channel_title:last p').text(data[x].ch_name);
+            $.ajax({
+                url:backSideURL+"api/index/channelNews",
+                method:"POST",
+                dataType:"json",
+                contentType:"application/json; charset=UTF-8",
+                data:'{"channelId":'+data[x].ch_id+'}',
+                xhrFields:{
+                    withCredentials:true
+                },
+                success:successChannel
+            });
+        }
+        $('.channel_title:first').remove();
+        $('.channel_content:first').remove();
+    }
+    function successChannel(data) {
+        var json=eval(data);
+        if(json.code===100) {
+            var imgNews=json.object.imgNews;
+            var textNews=json.object.textNews;
+
+            for(x in imgNews){
+                $('.img_news_area * a:eq('+x+')',$('.channel_content[chid="'+imgNews[x].n_channel+'"]')).attr('href','/news/'+imgNews[x].n_id)
+                $('.img_news_area * img:eq('+x+')',$('.channel_content[chid="'+imgNews[x].n_channel+'"]')).attr('src',imgNews[x].n_pic);
+                $('.img_news_area * p:eq('+x+')',$('.channel_content[chid="'+imgNews[x].n_channel+'"]')).text(imgNews[x].n_title);
+            }
+            for(x in textNews){
+                $('.news_col p:eq('+x+')',$('.channel_content[chid="'+textNews[x].n_channel+'"]')).text(textNews[x].n_title);
+                $('.news_col a:eq('+x+')',$('.channel_content[chid="'+textNews[x].n_channel+'"]')).attr('href','/news/'+textNews[x].n_id);
+            }
+        }
+    }
+    function successHot(data) {
+        var json=eval(data);
+        if(json.code===100) {
+            var imgNews=json.object.imgNews;
+            var textNews=json.object.textNews;
+            for(x in imgNews){
+                $('.carousel-indicators').append($('.carousel-indicators li:first').clone());
+                $('.carousel-indicators li:last').attr('data-slide-to',x);
+                $('.carousel-inner').append($('.item:first',$('#hot_news .carousel-inner')).clone());
+                var img=$('.item:last img',$('#hot_news .carousel-inner'));
+                img.attr({
+                    'src':imgNews[x].n_pic,
+                    'alt':imgNews[x].n_title
+                });
+                var title=$('.item:last .carousel-title',$('#hot_news .carousel-inner'));
+                title.text(imgNews[x].n_title);
+                var a=$('.item:last a',$('#hot_news .carousel-inner'));
+                a.attr("href",'news/'+imgNews[x].n_id);
+                if(x==imgNews.length-1){
+                    $('.carousel-indicators li:first').remove();
+                    $('.carousel-indicators li:first').addClass('active');
+                    var item=$('.item:first',$('#hot_news .carousel-inner'))
+                    item.remove();
+                    item=$('.item:first',$('#hot_news .carousel-inner'));
+                    item.addClass('active');
+                }
+            }
+            for(x in textNews){
+                $('.news_col p:eq('+x+')',$('#hot_news')).text(textNews[x].n_title);
+                $('.news_col p:eq('+x+')',$('#hot_news')).parent().attr('href','/news/'+textNews[x].n_id);
+            }
+        }
+    }
+</script>

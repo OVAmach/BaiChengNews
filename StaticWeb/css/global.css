@@ -1,0 +1,26 @@
+#head{
+    background-color: #24292e;
+}
+#head div{
+    color: #ffffff;
+}
+#nav{
+    width: 100%;
+    margin-top: 0px;
+    /*height: 40px;*/
+    background-color: #24292e;
+}
+.navbar {
+    margin-bottom: 0px;
+}
+#search{
+    position: relative;
+    top: 14px;
+
+}
+a:focus,a:hover{
+    color: #000000;
+}
+a{
+    color: #000000;
+}
