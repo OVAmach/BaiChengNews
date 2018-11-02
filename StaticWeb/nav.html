@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+
 <div class="container">
     <div class="row navbar navbar-inverse">
         <div class="navbar-header">
@@ -13,12 +14,25 @@
         </div>
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul id="nav_row" class="nav navbar-nav">
-                <li><a href="/">首页</a></li>
+                <li class="active"><a href="/">首页</a></li>
+                <li v-for="(ch,index) in list" :code="ch.ch_code"><a :href="'/channel/'+ch.ch_code">{{ch.ch_name}}</a></li>
             </ul>
         </div>
     </div>
 </div>
 <script>
+    var nav=new Vue({
+        el:'#nav_row',
+        data:{
+            list:[]
+        },
+        updated:function () {
+            if(path[path.length-2]=='channel')
+                changeNavActive(channelCode);
+        }
+    });
+    var path=location.pathname.split('/');
+    var channelCode=path[path.length-1];
     $(function () {
         $('ul.navbar-nav li:first-child').addClass("active");
         $('ul.navbar-nav li').click(function (e){
@@ -26,10 +40,13 @@
             $(this).addClass("active");
         });
         addChannelListListener(addNav);
+
     });
+    function changeNavActive(code) {
+        $('ul.navbar-nav li').removeClass("active");
+        $("ul.navbar-nav li[code="+code+"]").addClass('active');
+    }
     function addNav(data) {
-        for(x in data){
-            $('#nav_row').append("<li><a href='"+"/channel/"+data[x].ch_code+"'>"+data[x].ch_name+"</a></li>");
-        }
+        nav.list=data;
     }
 </script>

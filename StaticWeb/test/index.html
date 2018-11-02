@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/Vue.js"></script>
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <style>
+        .fa{
+            animation-name: spin;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: initial;
+            animation-iteration-count: infinite;
+            animation-direction: initial;
+            animation-fill-mode: initial;
+            animation-play-state: initial;
+        }
+        @keyframes spin {
+            0%{transform: rotate(0deg)}
+            100%{transform: rotate(360deg)}
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="list">
+            <div v-for="news in list">
+                <p><i class="fa fa-spinner"></i>{{news.title}}</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    var vm=new Vue({
+        el:'#list',
+        data:{
+            title:'杭州',
+            list:[{
+                title:'西湖'
+            },{
+                title:'宝石山'
+            }]
+        }
+    })
+</script>
+</html>

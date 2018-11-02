@@ -18,7 +18,8 @@
     font-weight: bold;
 }
 .channel_content{
-    height: 361.66px;
+    max-height: 361.66px;
+    min-height: 0px;
     margin-top: 20px;
 }
 .img_news_area{

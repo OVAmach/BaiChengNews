@@ -5,8 +5,16 @@ import java.util.List;
 import com.iteamcn.baichengnews.entity.News;
 
 public class NewsGroup {
+	private int channelId;
 	private List<News> textNews;
 	private List<News> imgNews;
+	
+	public int getChannelId() {
+		return channelId;
+	}
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
+	}
 	public List<News> getTextNews() {
 		return textNews;
 	}
@@ -21,6 +29,12 @@ public class NewsGroup {
 	}
 	public NewsGroup(List<News> textNews, List<News> imgNews) {
 		super();
+		this.textNews = textNews;
+		this.imgNews = imgNews;
+	}
+	public NewsGroup(int channelId, List<News> textNews, List<News> imgNews) {
+		super();
+		this.channelId = channelId;
 		this.textNews = textNews;
 		this.imgNews = imgNews;
 	}

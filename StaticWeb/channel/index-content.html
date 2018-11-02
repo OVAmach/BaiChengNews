@@ -11,7 +11,7 @@
     var list=-1;
     var path=location.pathname.split('/');
     var channelCode=path[path.length-1];
-    addChannelListListener(channelListListener);
+    addChannelListListener(channelListListener);//注册频道列表监听
     function channelListListener(data) {
         for(x in data){
             if(data[x].ch_code==channelCode){

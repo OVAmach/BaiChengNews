@@ -56,7 +56,7 @@ public class NewsService {
 	public NewsGroup selectIndexChannelNews(Integer channelId){
 		List<News> textNews=dao.selectBaseByChannelWithLimit(channelId,13);
 		List<News> imgNews=dao.selectBaseByChannelWithImgLimit(channelId, 4);
-		return new NewsGroup(textNews, imgNews);
+		return new NewsGroup(channelId,textNews, imgNews);
 	}
 	public List<News> selectBaseNewsByChannel(PageInfo page,Integer channelId){
 		return dao.selectBaseAllByChannelListPage(page, channelId);

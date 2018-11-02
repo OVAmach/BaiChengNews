@@ -105,6 +105,15 @@
         </tr>
         </thead>
         <tbody id="news_list">
+            <tr v-for="(news,index) in list">
+                <td>{{news.n_id}}</td>
+                <td>{{news.n_channelObject.ch_name}}</td>
+                <td>{{news.n_title}}</td>
+                <td>{{new Date(news.n_date).toString()}}</td>
+                <td>{{news.n_authorObject.u_name}}</td>
+                <td><button type="button" class="btn btn-primary edit" :newsId="index">修改</button></td>
+                <td><button type="button" class="btn btn-danger delete" :newsId="index">删除</button></td>
+            </tr>
         </tbody>
     </table>
     <div id="list_group" class="btn-group">
@@ -113,6 +122,35 @@
 <script>
     var page=1;
     var list=-1;
+    var newsList=new Vue({
+        el:'#news_list',
+        data:{
+            page:{},
+            list:[{
+                "n_id": -1,
+                "n_channel": -1,
+                "n_channelObject": null,
+                "n_title": "无法连接到服务器",
+                "n_pic": "\\image\\slide1.png",
+                "n_date": 1531121913000,
+                "n_priority": 0,
+                "n_author": -1,
+                "n_authorObject": null,
+                "n_can_comment": true,
+                "n_content": "如果持续出现这种情况，请联系网站管理员"
+            }]
+
+        },
+        updated:function () {
+            $('.edit').click(function () {
+                editNews($(this).attr('newsId'));
+            });
+            $('.delete').click(function () {
+                deleteNews($(this).attr('newsId'));
+            });
+        }
+
+    });
     addChannelListListener(channelListListener);
     loadNewsList(page);
     function channelListListener(data) {
@@ -141,23 +179,24 @@
         if(json.code==100){
             var page=json.object.page;
             list=json.object.list;
-            $('#news_list').html('');
-            for(x in list){
-                var news=list[x];
-                $('#news_list').append('<tr><td>'+news.n_id+'</td>' +
-                    '<td>'+news.n_channelObject.ch_name+'</td>' +
-                    '<td>'+news.n_title+'</td>' +
-                    '<td>'+new Date(news.n_date)+'</td>' +
-                    '<td>'+news.n_authorObject.u_name+'</td>' +
-                    '<td><button type="button" class="btn btn-primary edit" newsId="'+x+'">修改</button></td>' +
-                    '<td><button type="button" class="btn btn-danger delete" newsId="'+x+'">删除</button></td></tr>');
-            }
-            $('.edit').click(function () {
-                editNews($(this).attr('newsId'));
-            });
-            $('.delete').click(function () {
-                deleteNews($(this).attr('newsId'));
-            });
+            // $('#news_list').html('');
+            // for(x in list){
+            //     var news=list[x];
+            //     $('#news_list').append('<tr><td>'+news.n_id+'</td>' +
+            //         '<td>'+news.n_channelObject.ch_name+'</td>' +
+            //         '<td>'+news.n_title+'</td>' +
+            //         '<td>'+new Date(news.n_date)+'</td>' +
+            //         '<td>'+news.n_authorObject.u_name+'</td>' +
+            //         '<td><button type="button" class="btn btn-primary edit" newsId="'+x+'">修改</button></td>' +
+            //         '<td><button type="button" class="btn btn-danger delete" newsId="'+x+'">删除</button></td></tr>');
+            // }
+            // $('.edit').click(function () {
+            //     editNews($(this).attr('newsId'));
+            // });
+            // $('.delete').click(function () {
+            //     deleteNews($(this).attr('newsId'));
+            // });
+            newsList.list=list;
             $('#list_group').html('');
             var cur=page.currentPage;
             if(cur>=3){
@@ -182,7 +221,9 @@
             }
             $('#list_group').append('<button type="button" class="btn btn-default">共'+tot+'页</button>');
             $('.list').click(function () {
-                loadNewsList(parseInt($(this).attr('list')));
+                if(!$(this).hasClass('disabled')){
+                    loadNewsList(parseInt($(this).attr('list')));
+                }
             })
         }
     }

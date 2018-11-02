@@ -14,6 +14,7 @@ $(function () {
     loadChannelList();
     checkLogin();
 });
+//加载频道列表
 function loadChannelList() {
     $.ajax({
         url:backSideURL+"api/channel/list",
@@ -25,6 +26,7 @@ function loadChannelList() {
         success:successLoadChannelList
     });
 }
+//添加频道列表监听
 function addChannelListListener(callback){
     if(channelList!=-1){
         callback(channelList);
@@ -32,6 +34,7 @@ function addChannelListListener(callback){
         channelListCallBack.push(callback);
     }
 }
+//成功加载频道列表
 function successLoadChannelList(data) {
     var json=eval(data);
     if(json.code===100) {

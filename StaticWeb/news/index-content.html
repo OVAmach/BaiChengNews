@@ -3,21 +3,37 @@
 <div id="content">
     <div id="news_title_bar" class="row">
         <div class="row">
-            <p id="news_title">没有标题</p>
+            <p id="news_title">{{info.n_title}}</p>
         </div>
         <div class="row">
-            <p>作者:<a id="author_name">author</a></p>
+            <p>作者:<a id="author_name" :href="'/user/detail/'+info.n_authorObject.u_id">{{info.n_authorObject.u_nick}}</a></p>
         </div>
         <div class="row">
-            <p id="news_time">time</p>
+            <p id="news_time">{{new Date(info.n_date).toString()}}</p>
         </div>
 
     </div>
     <div id="news_content" class="row">
-        <p>没有正文</p>
+        <p>{{info.n_content}}</p>
     </div>
 </div>
 <script>
+
+    var newsDetail=new Vue({
+        el:'#content',
+        data:{
+            info:{
+                n_title:'',
+                n_author:'',
+                n_authorObject:{
+                    u_id:-1,
+                    u_nick:'null'
+                },
+                n_date:'',
+                n_content:''
+            }
+        }
+    });
     $(function () {
         // $('.img_news_area * img').addClass("img-responsive");
         // $('.img_news_area').addClass("visible-lg");
@@ -40,16 +56,8 @@
     function successNews(data) {
         var json=eval(data);
         if(json.code===100) {
-            var title=json.object.n_title;
-            var authorName=json.object.n_authorObject.u_nick;
-            var authorId=json.object.n_authorObject.u_id;
-            var date=new Date(json.object.n_date);
-            var content=json.object.n_content;
-            $('#news_title').text(title);
-            $('#author_name').text(authorName);
-            $('#author_name').attr('href','/user/detail/'+authorId);
-            $('#news_time').text(date);
-            $('#news_content').html(content);
+            newsDetail.info=json.object;
+            debugger;
         }
     }
 </script>

@@ -24,3 +24,17 @@ a:focus,a:hover{
 a{
     color: #000000;
 }
+.spin{
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: initial;
+    animation-iteration-count: infinite;
+    animation-direction: initial;
+    animation-fill-mode: initial;
+    animation-play-state: initial;
+}
+@keyframes spin {
+    0%{transform: rotate(0deg)}
+    100%{transform: rotate(360deg)}
+}
