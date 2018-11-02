@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>5.0.5.RELEASE</spring.version>
+		<spring.version>5.0.7.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.4.6</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.1.41</version>
+			<version>1.2.31</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
